@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Helpers;
 using Core;
+using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,8 +32,10 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-services.AddScoped<IProductRepository,ProductRepository>();
-services.AddDbContext<StoreContext>(options =>{
+          services.AddScoped<IProductRepository,ProductRepository>();
+          services.AddScoped(typeof(IGenericRepository<>),(typeof(GenericRepository<>)));
+         services.AddAutoMapper(typeof(MappingProfiles));
+          services.AddDbContext<StoreContext>(options =>{
     options.UseSqlServer
     (_config.GetConnectionString("DefaultConnection"));});
 
@@ -58,7 +62,7 @@ services.AddDbContext<StoreContext>(options =>{
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+app.UseStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
