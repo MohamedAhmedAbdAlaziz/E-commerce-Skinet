@@ -70,7 +70,8 @@ namespace API.Controllers
            // var product= await _productsRepo.GetbyIdAsync(id);
           // return product;
 
-
+   
+     if(product == null) return NotFound(new ApiResponse(404));
          return  _mapper.Map<Product,ProductToReturnDto>(product);
             }
 

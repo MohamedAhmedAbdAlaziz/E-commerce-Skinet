@@ -35,15 +35,19 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
            services.AddAutoMapper(typeof(MappingProfiles));
           services.AddDbContext<StoreContext>(options =>{
     options.UseSqlServer
     (_config.GetConnectionString("DefaultConnection"));});
-
-            services.AddApplicationServices();
+     
+    
+           
 
             services.AddControllers();
             services.AddSwaggerDocumentation();
+      services.AddApplicationServices();
+
            services.AddCors(opt=> {
 opt.AddPolicy("CorsPolicy",policy=>{
 
@@ -64,7 +68,7 @@ opt.AddPolicy("CorsPolicy",policy=>{
              //   app.UseDeveloperExceptionPage();
                
           //  }
-        app.UseStatusCodePagesWithReExecute("/errors/{0}");
+    app.UseStatusCodePagesWithReExecute("/errors/{0}");
             app.UseHttpsRedirection();
 
             app.UseRouting();
