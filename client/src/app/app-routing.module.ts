@@ -27,6 +27,26 @@ const routes: Routes = [
       import('./shop/shop.module').then((mod) => mod.ShopModule),
     data: { breadcrumb: 'shop' },
   },
+  {
+    path: 'shop',
+    loadChildren: () =>
+      import('./shop/shop.module').then((mod) => mod.ShopModule),
+    data: { breadcrumb: 'shop' },
+  },
+  {
+    path: 'basket',
+    loadChildren: () =>
+      import('./basket/basket.module').then((mod) => mod.BasketModule),
+    data: { breadcrumb: 'basket' },
+  },
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('./checkout/checkout-routing.module').then(
+        (mod) => mod.CheckoutRoutingModule
+      ),
+    data: { breadcrumb: 'checkout' },
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
